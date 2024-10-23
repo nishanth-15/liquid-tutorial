@@ -1,0 +1,43 @@
+{% comment %}
+  Date filters
+{% endcomment %}
+{{ 'my-css.css' | asset_url | stylesheet_tag }}
+
+<strong>Note: 'now' is a special variable in liquid to fetch the current date and time</strong>
+<br/>
+
+<strong>Date filter</strong>
+Today in the format 'DD-MM-YYYY':
+{{ 'now' | date: '%d-%m-%Y' }}
+<br/>
+Copyright &copy; {{ 'now' | date: '%Y'}}
+<br/>
+<br/>
+
+{% comment %}
+  Color filters
+{% endcomment %}
+<strong>Color darken filters (color_darker: number)</strong>
+<div class="swatch" style="background: {{"white" |  color_darken: 20}}"></div>
+<br/>
+
+<strong>Color lighten filters (color_lighten: number)</strong>
+<div class="swatch" style="background: {{"black" |  color_lighten: 40}}"></div>
+<br/>
+
+<strong>Color mix filter (color_mix: color, value)</strong>
+<div class="swatch" style="background: {{"ff0000" |  color_mix: "0000ff", 50}}"></div>
+<br/>
+
+<strong>Color conversion (color_to_rgba | color_to_hex | color_to_hsl)</strong>
+{% assign hex_color = "#00ff00" %}
+{% assign rgb_color = "rgb(0,255,0)" %}
+{{hex_color}} to RGB: {{ hex_color | color_to_rgb }}
+<br/>
+{{rgb_color}} to HEX: {{ hex_color | color_to_hex }}
+<br/>
+<br/>
+
+<strong>Color contrast (color_contrast: color)</strong>
+Contrast between green and white: {{ "#00ff00" | color_contrast: "#fff" }}
+<br/>

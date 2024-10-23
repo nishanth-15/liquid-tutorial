@@ -1,0 +1,65 @@
+{% assign myVar = 11 %}
+
+{% comment %}
+  if-else statement
+{% endcomment %}
+<strong>If-else statement:</strong>
+{% if myVar > 10 %}
+  <span>
+    {{ myVar }} is greater than 10</span>
+{% else %}
+  <span>
+    {{ myVar }} is less than 10</span>
+{% endif %}
+
+<br/>
+
+{% comment %}
+  contains statement
+{% endcomment %}
+<strong>contains statement (works in product pages only):</strong>
+{% if product.title contains "Bag" %}
+  <span>
+    This product is a bag</span>
+{% else %}
+  <span>
+    This product is not a bag</span>
+{% endif %}
+
+<br/>
+
+{% comment %}
+  Comment statement
+{% endcomment %}
+{% if product %}
+  <strong>unless statement (opposite of if):</strong>
+  {% unless product.tags contains "Premium" %}
+    <span>
+      This product is not premium</span>
+  {% else %}
+    <span>
+      This product is premium</span>
+  {% endunless %}
+{% endif %}
+
+<br/>
+
+<strong>Liquid doesn't allow parenthesis() to group statements seperated by and, or etc. Instead it evaluates all one at a time from right to left</strong>
+<br/>
+
+{% comment %}
+  Switch-when
+{% endcomment %}
+{% if product.type != blank %}
+  <strong>Switch-when-else statement (same as switch-else-default):</strong>
+  {% case product.type %}
+    {% when "Top" %}
+      <span>This product is a top</span>
+    {% when "Jacket" %}
+      <span>This product is a jacket</span>
+    {% when "Bag" %}
+      <span>This product is a bag</span>
+    {% else %}
+      <span>This product is not a top, jacket, or bag</span>
+  {% endcase %}
+{% endif %}

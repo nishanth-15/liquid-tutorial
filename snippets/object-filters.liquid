@@ -1,0 +1,23 @@
+{% comment %}
+  JSON Filter
+{% endcomment %}
+<style>
+  .highlight {
+    background-color: yellow;
+  }
+</style>
+
+<strong>JSON Filter (json) - used to format an object in JSON format</strong>
+{{ collection.products.first | json }}
+{{ shop | json }}
+<strong>Note: JSON Filter may not work on some objects like 'shop' as shown above</strong>
+<br/>
+
+<strong>Default Filter (default: default_value) - used to specify a default value</strong>
+Description of collection '{{ collection.title }}' - {{ collection.description | default: 'This is a default description' }}
+<br/>
+
+
+<strong>Highlight Filter (Highlight: string) - used to Highlight a substring</strong>
+{{ collection.description | highlight: "This is" }}
+<br/>

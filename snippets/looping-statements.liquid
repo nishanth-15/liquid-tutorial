@@ -1,0 +1,37 @@
+{% comment %} Forloop (first product has green color) {% endcomment %}
+
+{% for product in collection.products limit: 5 offset: 1 %}
+  {% if forloop.first %}
+    <strong>List of first 5 products:</strong>
+  {% endif %}
+  <span style="
+      {% if forloop.first %}
+        color: green;
+      {% elsif forloop.last %}
+        color: blue;
+      {% endif %}
+    ">
+    {{ forloop.index }}. {{ product.title }}
+    {% if product.tags.size > 0 %}
+      <h3 style="margin: 0 2rem; color: inherit;">Tags:</h3>
+      <ul style="padding: 0; margin: 0 6rem">
+        {% for tag in product.tags %}
+          <li style="padding: 0; margin: 0">Product index: {{ forloop.parentloop.index }} | Tag: {{ tag }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </span>
+{% else %}
+  <span>There are no products in this collection page</span>
+{% endfor %}
+
+<br>
+
+{% comment %}
+  Looping through arbitrary range
+{% endcomment %}
+<strong>Looping through arbitrary range 11 to 16 (11..16)</strong>
+{% for i in (11..16) %}
+  {{ forloop.index }}.) {{ i }}
+  <br/>
+{% endfor %}

@@ -1,0 +1,58 @@
+{% comment %}
+  We can even decalre variable with a '-' like this:
+
+  {%- assign greetings = "Hello World" -%}
+  {{- greetings -}}
+
+  -> Without dash there will be a line added before and after the variable IN THE PAGE SOURCE.
+  -> So since it wont affect the rendered page we may or may not use the '-'
+{% endcomment %}
+
+{% comment %} String datatype {% endcomment %}
+{% assign greetings = "Hello World" %}
+String = {{ greetings }}
+
+<br/>
+
+{% comment %} Number datatype {% endcomment %}
+{% assign intNum = 12 %}
+{% assign floatNum = 12.9 %}
+Integer = {{ intNum }}, Float = {{ floatNum }}
+
+<br/>
+
+{% comment %} Boolean datatype {% endcomment %}
+{% assign boolVar = true %}
+Boolean = {{ boolVar }}
+
+<br/>
+
+{% comment %}nil or null {% endcomment %} 
+{% assign nilVar = nil %}
+{% assign nullVar = null %}
+{% if nilVar == null and nullVar == nil %}
+  {{ "nil and null in liquid are the same" }}
+{% endif %}
+
+<br/>
+<br/>
+
+{% comment %} Array datatype {% endcomment %}
+ <strong>Product tag from shopify store (works on products page only):</strong>
+ <br/>
+{% for tag in product.tags %}
+  {{ tag }}
+  <br/>
+{% endfor %}
+
+<br/>
+
+{% comment %} Object datatype {% endcomment %}
+{{ product.title }}
+
+{% comment %} capture block {% endcomment %}
+ <strong>Capture block :-</strong>
+{% capture html %}
+  <span>You're viewing {{ product.title }}</span>
+{% endcapture %}
+{{ html }}

@@ -1,0 +1,84 @@
+{% comment %}
+  Array filters
+{% endcomment %}
+<strong>Split filter (split: string) - split string into array of items</strong>
+{% assign my_string = '1,2,3,4' %}
+{% assign my_number = my_string | split: ',' %}
+{{ my_string }} into array is:
+{% for number in my_number %}
+  {{ number }}
+{% endfor %}
+<br>
+
+{% assign my_string = 'html|orange,css|blue,js|red' %}
+{{ my_string }} into array is (we can use split to create array and then use first and last to fetch language and
+color):
+{% assign my_array = my_string | split: ',' %}
+{% for item in my_array %}
+  {% assign language_name = item | split: '|' | first %}
+  {% assign language_color = item | split: '|' | last %}
+  <div style="display: flex; align-items: center; gap: 5px">
+    {{ item }} =
+    <span style="color: {{ language_color }}; margin: 0;">{{ language_name }}</span>
+  </div>
+{% endfor %}
+<br>
+
+<strong>Map filter (map:key in string) - fetches a key from each object in array and returns an array</strong>
+{% assign products = collection.products %}
+{% assign product_titles = products | map: 'title' %}
+{% for item in product_titles limit: 5 %}
+  {{ item }}<br/>
+{% endfor %}
+<br/>
+
+{% comment %} <strong>Slice, Reverse and Join filters (slice: starting_index, last_index | reverse | join: string)</strong>
+{{ product_titles | slice: 0,3 | reverse | join: ", " }}
+<br/>
+<br/> {% endcomment %}
+
+{% comment %} <strong>First, Last and Size filters (first | last | size)</strong>
+First product: {{ product_titles | first}}
+<br>
+Last product: {{ product_titles | last }}
+<br>
+Number of products: {{ product_titles | size }}
+<br/>
+<strong>Note: we can use '.first' instead of '| first' (applies for size and last too)</strong>
+<br/>
+
+<strong>Sort filter (sort) - sorts an array</strong>
+{% assign products_price = products | map: "price" | sort %}
+{% for item in products_price limit: 5 %}
+  {{ item | money }}<br/>
+{% endfor %}
+<br/> {% endcomment %}
+
+{% comment %} <strong>Sort filter (sort:key in string) - sorts an array of objects based on the key passed</strong>
+{% assign sorted_products = products | sort: 'price' %}
+{% for item in sorted_products limit: 5 %}
+  {{ item.title }} - {{ item.price | money }}<br/>
+{% endfor %}
+<br/> {% endcomment %}
+
+<strong>Sum filter (sum) - returns sum of all items (numbers only) of an array</strong>
+{% assign products_price = products | map: "price" | sort %}
+Sum of prices of all products = {{ products_price | sum | money }}
+{% assign products_price = products | map: "price" | sort %}
+<br/>
+<br/>
+
+<strong>Where filter (where: key, value) - filters an array of objects based on the key-value pair passed</strong>
+{% assign bag_products = products |  where: "title", "Black Leather Bag" | first %}
+{{ bag_products.title }} - {{ bag_products.price | money }}
+<br/>
+
+<strong>Unique filter (uniq) - returns unique set of items from an array</strong>
+{% assign product_tags = "" %}
+{% for product in products %}
+  {% for tag in product.tags %}
+    {% assign product_tags = product_tags | append: tag |  append: ', ' %}
+  {% endfor %}
+{% endfor %}
+
+Unique product tags - {{product_tags | split:", " | uniq | split: "  " }}

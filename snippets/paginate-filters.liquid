@@ -1,0 +1,87 @@
+{% comment %}
+  Pagination using paginate tag
+{% endcomment %}
+<strong>We can only loop through 50 items at a time. To solve this we implement paginatation using "paginate" tag</strong>
+{% paginate collection.products by 5 %}
+  {% for product in collection.products %}
+    {{ paginate.current_page | minus: 1 | times: paginate.page_size | plus: forloop.index }}. {{ product.title }}
+    <br/>
+  {% endfor %}
+  <div style="display: flex; align-items: center; gap: 10px; padding: 0 3px;">{{ paginate | default_pagination }}</div>
+{% endpaginate %}
+<br/>
+
+<br/>
+
+{% comment %}
+  Filters
+{% endcomment %}
+<strong>Filters are used to transform an item to another item based on a logic.</strong>
+<strong>Arithmetic Filter:</strong>
+{% assign a = 10 %}
+{%  assign b = 5 %}
+{{a}} + {{b}} = {{ a | plus: b}}
+<br/>
+{{a}} - {{b}} = {{a | minus: b}}
+<br/>
+{{a}} * {{b}} = {{a | times: b}}
+<br/>
+{{a}} / {{b}} = {{a | divided_by: b}}
+<br/>
+
+<strong>String to number by using plus filter (cannot use filter inside if statements):</strong>
+{% assign my_string = '12' %}
+{% assign my_number = my_string | plus: 0 %}
+'{{my_string}}' to number = {{ my_number }}
+<br/>
+{% if my_number > 10 %}
+  {{ my_number }} is grater than 10
+{% endif %}
+<br/>
+
+<strong>Modulo filter to check if number is even or odd:</strong>
+{% assign my_number = 11 %}
+{%  assign modulo_number = my_number | modulo: 2 %}
+{% if modulo_number == 0 %}
+  {{ my_number }} is an even number
+{% else %}
+  {{ my_number }} is an odd number
+{% endif %}
+<br/>
+
+<strong>Absolute filter (abs):</strong>
+{% assign my_number = -11 %}
+{% assign abs_number = my_number | abs %}
+Absolute value of {{ my_number }} is {{ abs_number }}
+
+<strong>Round filter (round):</strong>
+{% assign floor_number = 12.4 %}
+{% assign ceil_number = 12.6 %}
+{% assign middle_number = 12.5 %}
+Rounded value of {{floor_number}} = {{ floor_number | round }}<br/>
+Rounded value of {{ceil_number}} = {{ ceil_number | round }}<br/>
+Rounded value of {{middle_number}} = {{ middle_number | round }}<br/>
+
+<strong>Ceil filter (ceil):</strong>
+{% assign floor_number = 12.4 %}
+{% assign ceil_number = 12.6 %}
+{% assign middle_number = 12.5 %}
+Ceil value of {{floor_number}}, {{ceil_number}} and {{middle_number}} = {{ floor_number | ceil }}<br/>
+
+<strong>Floor filter (floor):</strong>
+{% assign floor_number = 12.4 %}
+{% assign ceil_number = 12.6 %}
+{% assign middle_number = 12.5 %}
+Floor value of {{floor_number}}, {{ceil_number}} and {{middle_number}} = {{ floor_number | floor }}<br/>
+
+<strong>Atleast filter (at_least = 60):</strong>
+{% assign floor_number = 80 %}
+{% assign ceil_number = 30 %}
+Atleast value of {{floor_number}} = {{ floor_number | at_least: 60 }}<br/>
+Atleast value of {{ceil_number}} = {{ ceil_number | at_least: 60 }}<br/>
+
+<strong>Atmost filter (at_most = 50):</strong>
+{% assign floor_number = 80 %}
+{% assign ceil_number = 30 %}
+Atmost value of {{floor_number}} = {{ floor_number | at_most: 50 }}<br/>
+Atmost value of {{ceil_number}} = {{ ceil_number | at_most: 50 }}<br/>

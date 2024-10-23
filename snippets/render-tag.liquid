@@ -1,0 +1,16 @@
+{% comment %}
+  For displaying default argument passed using 'with' keyword we have to use var whose name is same as the file
+{% endcomment %}
+{{ render-tag }}<br/>
+
+{% comment %}
+  title is the argument passed from theme.liquid and we can also use default filter to set default value
+{% endcomment %}
+{% assign title = title | default: 'This is the default title argument' %}
+{{ title }}<br/>
+
+{% comment %}
+  description is the argument passed from theme.liquid
+{% endcomment %}
+{{ description }}
+<br/>

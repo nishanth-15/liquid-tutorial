@@ -1,0 +1,11 @@
+{% comment %}
+  Image filter
+{% endcomment %}
+
+<strong>Image filter (image_url: width: number, height: number | image_tag) - need not use img and also meta data is provided by strapi</strong>
+{{ collection.products.first.featured_image | image_url: width: 300, height: 300 | image_tag }}
+
+<strong>Display image from assets folder - need to use img and also need to mention meta data seperately</strong>
+<img src="{{ 'icon-carrot.svg' | asset_url }}" alt="Black bag" loading="eager" width="300" height="300"/>
+
+<script src="{{ 'my-js.js' |  asset_url }}" defer></script>

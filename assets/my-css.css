@@ -1,0 +1,6 @@
+.swatch {
+  border-radius: 100%;
+  size: 30px;
+  border: 1px solid black;
+  display: block !important;
+}

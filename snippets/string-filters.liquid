@@ -1,0 +1,52 @@
+{% assign greeting = "hEllO WoRld" %}
+{% comment %}
+  String filters
+{% endcomment %}
+<strong>Uppercase filter (upcase)</strong>
+Uppercase of '{{greeting}}' is '{{greeting | upcase}}'
+
+<strong>Lowercase filter (downcase)</strong>
+Lowercase of '{{greeting}}' = '{{greeting | downcase}}'
+
+<strong>Capitalise filter (capitalize)</strong>
+Capitalise of '{{greeting}}' = '{{greeting | capitalize}}'
+
+<strong>Append filter (append:string)</strong>
+{% assign append_text = ", welcome!" %}
+Appending {{ append_text }} to '{{greeting}}' = '{{greeting | append: append_text}}'
+
+<strong>Strip filter (strip)</strong>
+{% assign whitespace = " string with whitespace    " %}
+'{{whitespace}}' without whitespace at either end = '{{whitespace | strip}}'
+
+<strong>Strip HTML filter(strip_html) - removes html tag from the string</strong>
+{% assign html_text = '<span style="color: red">Hello world</span>' %}
+<div style="display: flex; align-items: center; gap: 5px">{{html_text}} without html tag = '{{html_text | strip_html}}'</div>
+
+<strong>Truncate characters filter (truncate:number,string)</strong>
+{% assign long_text = "This is some very long text" %}
+'{{ long_text}}' truncated to 20 characters = {{ long_text | truncate: 20,"....!" }}
+
+<strong>Truncate words filter (truncatewords:number,string)</strong>
+{% assign long_text = "This is some very long text" %}
+'{{ long_text}}' truncated to 3 words = {{ long_text | truncatewords: 3,"....!" }}
+
+<strong>New line to br filter (new_line_to_br)</strong>
+{% assign multiline_text = "
+  This is first line
+  This is second line
+  This is third line
+" %}
+'{{ multiline_text}}' (without new line to br filter)
+{{ multiline_text | newline_to_br}}
+
+<strong>Replace filter (replace:string,string)</strong>
+{% assign my_text = "Some extra text some extra text" %}
+replace 'text' by 'string' in {{my_text}} = {{my_text | replace: "text", "string"}}
+<br/>
+We can also use rreplacefirst and replacelast too
+<strong>Remove filter (remove:string)</strong>
+{% assign my_text = "Some extra text some extra text" %}
+remove 'extra' in {{my_text}} = {{my_text | remove: "extra"}}
+<br/>
+We can also use removefirst and removelast too
